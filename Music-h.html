@@ -188,17 +188,7 @@
   <audio id="audioPlayer"></audio>
   <script>
 
-fetch('hedare.html')
-  .then(response => {
-    if (!response.ok) {
-      throw new Error('Network response was not ok ' + response.statusText);
-    }
-    return response.text();
-  })
-  .then(data => {
-    document.getElementById('header_placeholder').innerHTML = data;
-  })
-  .catch(error => console.log('ارور دانلود هدر:', error));
+
 
       
 
