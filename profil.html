@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پروفایل کاربر</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+.header {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+.header nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.header nav ul li {
+    margin: 0 10px;
+}
+
+.header nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+.header nav ul li a:hover {
+    text-decoration: underline;
+}
+
+main {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-section, .saved-music-section, .password-section {
+    margin-bottom: 20px;
+}
+
+h2 {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+}
+
+.input-box {
+    margin-bottom: 15px;
+}
+
+.input-box label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.input-box input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #03a9f4;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0288d1;
+}
+
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>پروفایل کاربر</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">خانه</a></li>
+                <li><a href="profile.html">پروفایل</a></li>
+                <li><a href="logout.php">خروج</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="profile-section">
+            <h2>تنظیمات پروفایل</h2>
+            <form id="profileForm" action="update_profile.php" method="post">
+                <div class="input-box">
+                    <label for="username">نام کاربری</label>
+                    <input type="text" id="username" name="username" value="current_username" required>
+                </div>
+                <div class="input-box">
+                    <label for="email">ایمیل</label>
+                    <input type="email" id="email" name="email" value="current_email" required>
+                </div>
+                <div class="input-box">
+                    <label for="phone">شماره تلفن</label>
+                    <input type="tel" id="phone" name="phone" value="current_phone" required>
+                </div>
+                <button type="submit">به‌روزرسانی پروفایل</button>
+            </form>
+        </section>
+
+        <section class="saved-music-section">
+            <h2>موزیک‌های ذخیره شده</h2>
+            <ul id="savedMusicList">
+                <!-- لیست موزیک‌های ذخیره شده اینجا نمایش داده می‌شود -->
+            </ul>
+        </section>
+
+        <section class="password-section">
+            <h2>تغییر رمز ورود</h2>
+            <form id="passwordForm" action="change_password.php" method="post">
+                <div class="input-box">
+                    <label for="current_password">رمز ورود فعلی</label>
+                    <input type="password" id="current_password" name="current_password" required>
+                </div>
+                <div class="input-box">
+                    <label for="new_password">رمز ورود جدید</label>
+                    <input type="password" id="new_password" name="new_password" required>
+                </div>
+                <button type="submit">تغییر رمز ورود</button>
+            </form>
+        </section>
+    </main>
+   <script>
+    document.addEventListener('DOMContentLoaded', function() {
+    loadSavedMusic();
+});
+
+function loadSavedMusic() {
+    const savedMusicList = document.getElementById('savedMusicList');
+    const savedMusic = ["آهنگ ۱", "آهنگ ۲", "آهنگ ۳"]; // این باید با درخواست AJAX جایگزین شود
+
+    savedMusic.forEach(function(music) {
+        const listItem = document.createElement('li');
+        listItem.textContent = music;
+        savedMusicList.appendChild(listItem);
+    });
+}
+
+   </script>
+
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            background-color: #121212;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .qaleb{
+            background-color: #3A3A3A;
+            height: auto;
+            width: 400px; /* افزایش عرض کادر اصلی */
+            margin: 20px;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+        img{
+            height: 250px;
+            width: 250px;
+            border-radius: 20px;
+            margin: 0 auto 20px auto;
+            display: block;
+        }
+        audio{
+            width: 100%;
+            margin-top: 20px;
+            display: block;
+            background-color: #3A3A3A; /* هم‌ رنگ با .qaleb */
+            border: none;
+            border-radius: 10px;
+        }
+        audio::-webkit-media-controls-panel {
+            background-color: #3A3A3A;
+            border-radius: 10px;
+        }
+        .lyrics {
+            color: white;
+            font-size: 14px; /* اندازه فونت مناسب‌تر برای متن طولانی‌تر */
+            margin-top: 20px;
+            text-align: left;
+            direction: rtl;
+        }
+        .highlight {
+            color: yellow;
+        }
+        @media (max-width: 600px) {
+            .qaleb {
+                width: 90%;
+            }
+            img {
+                width: 100%;
+                height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="qaleb">
+        <div class="caver">
+            <img src="img/pori.png" alt="کاور">
+        </div>
+        <audio id="audio" controls>
+            <source src="https://dl.musichi.ir/1401/11/11/Poori-tttpttt-Prod-Alireza-Rifle.mp3" type="audio/mpeg">
+        </audio>
+        <div class="lyrics" id="lyrics">
+            <p id="line1">این یکی خشن نی</p>
+            <p id="line2">پو، پو، پو</p>
+            <p id="line3">نمیگام دکی مُکی</p>
+            <p id="line4">نمیگام اشی مشی</p>
+            <!-- ... ادامه متن ... -->
+        </div>
+    </div>
+
+    <script>
+        const audio = document.getElementById('audio');
+        const lyrics = [
+            { time: 0, line: 'این یکی خشن نی' },
+            { time: 1, line: 'پو، پو، پو' },
+            { time: 2, line: 'نمیگام دکی مُکی' },
+            { time: 3, line: 'نمیگام اشی مشی' },
+            // ... ادامه همگام‌سازی زمان و متن‌ها ...
+        ];
+        audio.addEventListener('timeupdate', function() {
+            const currentTime = audio.currentTime;
+            lyrics.forEach(lyric => {
+                const element = document.getElementById(`line${lyrics.indexOf(lyric) + 1}`);
+                if (currentTime >= lyric.time) {
+                    element.classList.add('highlight');
+                } else {
+                    element.classList.remove('highlight');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
