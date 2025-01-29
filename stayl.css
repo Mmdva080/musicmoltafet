@@ -3,6 +3,7 @@
     margin: 0;
     box-sizing: border-box;
 }
+
 .progress-container {
     width: 100%;
     height: 5px;
@@ -27,6 +28,7 @@ body {
     background-color: #282c34;
     color: #61dafb;
 }
+
 .logo {
     font-size: 24px;
     font-weight: bold;
@@ -150,46 +152,41 @@ hr {
 
 .scrol {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    display: grid;
-    grid-template-rows: 1fr 1fr;
-    grid-auto-flow: column;
-    direction: rtl;
     overflow-x: auto;
-    overflow-y: hidden;
-    white-space: nowrap;
     padding-left: 10%;
     scrollbar-color: #61dafb #000000;
-    /* تغییر رنگ اسکرول بار */
     scrollbar-width: thin;
-    /* باریک کردن اسکرول بار */
+    white-space: nowrap;
 }
 
-/* انیمیشن ها */
-@keyframes fadeIn {
-    0% { opacity: 0; transform: translateY(20px); }
-    100% { opacity: 1; transform: translateY(0); }
+.scrol::-webkit-scrollbar {
+    height: 8px;
 }
+
+.scrol::-webkit-scrollbar-thumb {
+    background-color: #61dafb;
+    border-radius: 10px;
+}
+
 .qaleb {
-    width: 203px;
-    height: 241px;
+    width: 150px;
+    height: auto;
     margin: 10px;
     border-radius: 10px;
     transition: all 0.3s ease;
     box-shadow: #ff0000;
     opacity: 0;
-
 }
+
 .qaleb.visible {
     animation: fadeIn 1s forwards; /* طول مدت انیمیشن */
     position: relative;
     z-index: 1; 
 }
+
 .qaleb:hover {
     transform: scale(1.05);
 }
-
 
 .footer {
     background-color: #242222;
@@ -205,7 +202,6 @@ hr {
 span {
     margin-bottom: 32px;
     background-color: #282c34;
-    
     text-align: center;
     border-radius: 10px;
 }
@@ -214,7 +210,7 @@ span:hover {
     background: #555555;
 }
 
-.lfoter{
+.lfoter {
     height: 200px;
     width: 200px;
     border-radius: 10px;
@@ -266,4 +262,9 @@ span:hover {
     .hidden {
         display: flex;
     }
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
 }
