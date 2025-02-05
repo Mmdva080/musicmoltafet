@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="fa">
 
@@ -13,13 +17,18 @@
     <div class="progress-container">
         <div class="progress-bar" id="progress-bar"></div>
     </div>
-    <header class="header">
+   <header class="header">
         <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
         <nav id="menu" class="hidden">
             <ul>
-                <li><a href="unite.html">خانه</a></li>
-                <li><a href="profil.html">پروفایل</a></li>
-                <li><a href="login.html">ثبت نام</a></li>
+                <li><a href="unite.php">خانه</a></li>
+                <li><a href="profil.php">پروفایل</a></li>
+                <?php if (isset($_SESSION['username'])): ?>
+                    <li>سلام، <?php echo htmlspecialchars($_SESSION['username']); ?></li>
+                    <li><a href="logout.php">خروج</a></li>
+                <?php else: ?>
+                    <li><a href="login.html">ثبت نام</a></li>
+                <?php endif; ?>
             </ul>
             <div class="logo">Rapmusic</div>
         </nav>
@@ -261,6 +270,16 @@ window.addEventListener('scroll', function() {
             }
         }
     </script>
+
+     <?php
+    // پیام دیباگ برای بررسی مشکلات جلسه
+    if (isset($_SESSION['username'])) {
+        echo "<p>نام کاربری جلسه: " . htmlspecialchars($_SESSION['username']) . "</p>";
+    } else {
+        echo "<p>جلسه نام کاربری تنظیم نشده است.</p>";
+    }
+    ?>
+    
 </body>
 
 </html>
