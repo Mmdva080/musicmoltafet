@@ -186,13 +186,7 @@
     <button onclick="showMusicItems()">نمایش موزیک‌ها</button>
   </div>
   <audio id="audioPlayer"></audio>
-  <script>
-
-
-
-      
-
-
+<script>
     function updateProgressBar() {
       const progressBar = document.getElementById('bar');
       const totalHeight = document.body.scrollHeight - window.innerHeight;
@@ -205,7 +199,6 @@
       'https://cdns.musicsmelon.com/Music/Hichkas%20-%20Oon%20Mesle%20Dadasham%20Bod%20%5B320%5D.mp3?_=6',
       'https://cdns.musicsmelon.com/Music/Hichkas%20-%20To%20Koja%20Boodi%20%5B320%5D.mp3?_=14',
       'https://cdn.musicgitar.ir/Music/Hichkas/320/Hichkas%20-%20Jadval%20O%20Roya.mp3?_=15'
-      // مسیرهای دیگر موزیک‌های خود را اضافه کنید
     ];
 
     let currentAudio = null;
@@ -272,7 +265,11 @@
       currentAudio.currentTime = (clickX / width) * duration;
       currentTime = currentAudio.currentTime;
     }
-  </script>
+</script>
+  
+
+    
+
 </body>
 
 </html>
