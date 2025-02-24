@@ -77,24 +77,11 @@
         <audio id="audio" controls>
             <source src="https://dl.musichi.ir/1401/11/11/Poori-tttpttt-Prod-Alireza-Rifle.mp3" type="audio/mpeg">
         </audio>
-        <div class="lyrics" id="lyrics">
-            <p id="line1">این یکی خشن نی</p>
-            <p id="line2">پو، پو، پو</p>
-            <p id="line3">نمیگام دکی مُکی</p>
-            <p id="line4">نمیگام اشی مشی</p>
-            <!-- ... ادامه متن ... -->
-        </div>
+        
     </div>
 
     <script>
-        const audio = document.getElementById('audio');
-        const lyrics = [
-            { time: 0, line: 'این یکی خشن نی' },
-            { time: 1, line: 'پو، پو، پو' },
-            { time: 2, line: 'نمیگام دکی مُکی' },
-            { time: 3, line: 'نمیگام اشی مشی' },
-            // ... ادامه همگام‌سازی زمان و متن‌ها ...
-        ];
+      
         audio.addEventListener('timeupdate', function() {
             const currentTime = audio.currentTime;
             lyrics.forEach(lyric => {
