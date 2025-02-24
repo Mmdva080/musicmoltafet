@@ -145,7 +145,7 @@
   </style>
 </head>
 
-<body>
+<body  onload="showMusicItems()">
   <div id="header_placeholder"></div>
   <div class="container">
     <div class="bar" id="bar"></div>
@@ -183,7 +183,7 @@
       <button id="playPause3" class="play-pause-button" onclick="togglePlayPause(2, 'playPause3')">پخش کردن</button>
     </div>
     <!-- تکرار برای سایر موزیک‌ها -->
-    <button onclick="showMusicItems()">نمایش موزیک‌ها</button>
+   
   </div>
   <audio id="audioPlayer"></audio>
   <script>
