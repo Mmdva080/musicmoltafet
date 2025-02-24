@@ -145,7 +145,7 @@
   </style>
 </head>
 
-<body>
+<body  onload="showMusicItems()">
   <div id="header_placeholder"></div>
   <div class="container">
     <div class="bar" id="bar"></div>
@@ -183,7 +183,7 @@
       <button id="playPause3" class="play-pause-button" onclick="togglePlayPause(2, 'playPause3')">پخش کردن</button>
     </div>
     <!-- تکرار برای سایر موزیک‌ها -->
-    <button onclick="showMusicItems()">نمایش موزیک‌ها</button>
+    
   </div>
   <audio id="audioPlayer"></audio>
 <script>
@@ -197,7 +197,7 @@
 
     const musicFiles = [
       'https://cdns.musicsmelon.com/Music/Hichkas%20-%20Oon%20Mesle%20Dadasham%20Bod%20%5B320%5D.mp3?_=6',
-      'https://cdns.musicsmelon.com/Music/Hichkas%20-%20To%20Koja%20Boodi%20%5B320%5D.mp3?_=14',
+      'https://irsv.upmusics.com/AliBZ/Shayan%20Eshraghi%20-%20To%20Koja%20Boodi%20(128).mp3',
       'https://cdn.musicgitar.ir/Music/Hichkas/320/Hichkas%20-%20Jadval%20O%20Roya.mp3?_=15'
     ];
 
