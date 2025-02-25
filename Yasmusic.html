@@ -213,52 +213,45 @@
       // مسیرهای دیگر موزیک‌های خود را اضافه کنید
     ];
 
-    let currentAudio = null;
-    let progressBar = null;
-    let currentTime = 0;
-    let currentButton = null;
-    let startTimeElement = null;
-    let endTimeElement = null;
+   let currentAudio = null;
+let currentButton = null;
+let startTimeElement = null;
+let endTimeElement = null;
+const musicTimes = [0, 0, 0]; // اضافه کردن آرایه‌ای برای نگهداری زمان پخش هر موزیک
 
-    function formatTime(seconds) {
-      const minutes = Math.floor(seconds / 60);
-      const secs = Math.floor(seconds % 60);
-      return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
+function togglePlayPause(index, buttonId) {
+  const button = document.getElementById(buttonId);
+
+  startTimeElement = document.getElementById('start-time' + (index + 1));
+  endTimeElement = document.getElementById('end-time' + (index + 1));
+
+  if (currentAudio && !currentAudio.paused) {
+    musicTimes[index] = currentAudio.currentTime; // ذخیره زمان پخش موزیک
+    currentAudio.pause();
+    button.textContent = 'پخش کردن';
+  } else {
+    if (currentAudio) {
+      currentAudio.pause();
     }
+    currentAudio = new Audio(musicFiles[index]);
+    currentAudio.currentTime = musicTimes[index]; // تنظیم زمان پخش موزیک از مقدار ذخیره شده
+    progressBar = document.getElementById('progress' + (index + 1));
+    currentAudio.ontimeupdate = () => {
+      const progress = (currentAudio.currentTime / currentAudio.duration) * 100;
+      progressBar.style.width = progress + '%';
+      startTimeElement.textContent = formatTime(currentAudio.currentTime);
+      endTimeElement.textContent = formatTime(currentAudio.duration - currentAudio.currentTime);
+    };
+    currentAudio.play();
+    button.textContent = 'متوقف کردن';
+    endTimeElement.textContent = formatTime(currentAudio.duration);
+  }
 
-    function togglePlayPause(index, buttonId) {
-      const button = document.getElementById(buttonId);
-
-      startTimeElement = document.getElementById('start-time' + (index + 1));
-      endTimeElement = document.getElementById('end-time' + (index + 1));
-
-      if (currentAudio && !currentAudio.paused) {
-        currentTime = currentAudio.currentTime;
-        currentAudio.pause();
-        button.textContent = 'پخش کردن';
-      } else {
-        if (currentAudio) {
-          currentAudio.pause();
-        }
-        currentAudio = new Audio(musicFiles[index]);
-        currentAudio.currentTime = currentTime;
-        progressBar = document.getElementById('progress' + (index + 1));
-        currentAudio.ontimeupdate = () => {
-          const progress = (currentAudio.currentTime / currentAudio.duration) * 100;
-          progressBar.style.width = progress + '%';
-          startTimeElement.textContent = formatTime(currentAudio.currentTime);
-          endTimeElement.textContent = formatTime(currentAudio.duration - currentAudio.currentTime);
-        };
-        currentAudio.play();
-        button.textContent = 'متوقف کردن';
-        endTimeElement.textContent = formatTime(currentAudio.duration); // اضافه کردن مقدار پایان موزیک
-      }
-
-      if (currentButton && currentButton !== button) {
-        currentButton.textContent = 'پخش کردن';
-      }
-      currentButton = button;
-    }
+  if (currentButton && currentButton !== button) {
+    currentButton.textContent = 'پخش کردن';
+  }
+  currentButton = button;
+}
 
     function showMusicItems() {
       const musicItems = document.querySelectorAll('.music-item');
