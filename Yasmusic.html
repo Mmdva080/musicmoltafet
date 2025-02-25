@@ -257,8 +257,8 @@ function showMusicItems() {
 
 function seek(event, progressBarId) {
   const progress = document.getElementById(progressBarId);
-  const clickX = event.offsetX;
   const width = progress.offsetWidth;
+  const clickX = event.offsetX || event.touches[0].clientX - progress.getBoundingClientRect().left;
   const duration = currentAudio.duration;
   currentAudio.currentTime = (clickX / width) * duration;
   currentTime = currentAudio.currentTime;
@@ -271,6 +271,13 @@ function updateProgressBar() {
   const progressPercentage = (scrollPosition / totalHeight) * 100;
   progressBar.style.width = progressPercentage + "%";
 }
+
+// اضافه کردن رویداد لمسی برای پشتیبانی از گوشی‌های موبایل
+document.querySelectorAll('.progress').forEach(progress => {
+  progress.addEventListener('click', event => seek(event, progress.id));
+  progress.addEventListener('touchstart', event => seek(event, progress.id));
+});
+
 
   </script>
 </body>
