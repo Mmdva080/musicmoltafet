@@ -192,32 +192,24 @@
 
   
   <script>
+const musicFiles = [
+  'https://cdn.musicgitar.ir/Music/Yas/128/Yas%20-%20Sarkoob%20%5B128%5D.mp3?_=6',
+  'https://cdn.musicgitar.ir/Music/Yas/128/Yas%20-%20Vasiat%20Nameh%20%5B128%5D.mp3?_=12',
+  'https://cdn.musicgitar.ir/Music/Yas/128/Yas%20-%20Nameyi%20Be%20Farzand%20%5B128%5D.mp3?_=18'
+  // مسیرهای دیگر موزیک‌های خود را اضافه کنید
+];
 
-
-
-      
-
-
-    function updateProgressBar() {
-      const progressBar = document.getElementById('bar');
-      const totalHeight = document.body.scrollHeight - window.innerHeight;
-      const scrollPosition = window.scrollY;
-      const progressPercentage = (scrollPosition / totalHeight) * 100;
-      progressBar.style.width = progressPercentage + "%";
-    }
-
-    const musicFiles = [
-      'https://cdn.musicgitar.ir/Music/Yas/128/Yas%20-%20Sarkoob%20%5B128%5D.mp3?_=6',
-      'https://cdn.musicgitar.ir/Music/Yas/128/Yas%20-%20Vasiat%20Nameh%20%5B128%5D.mp3?_=12',
-      'https://cdn.musicgitar.ir/Music/Yas/128/Yas%20-%20Nameyi%20Be%20Farzand%20%5B128%5D.mp3?_=18'
-      // مسیرهای دیگر موزیک‌های خود را اضافه کنید
-    ];
-
-   let currentAudio = null;
+let currentAudio = null;
 let currentButton = null;
 let startTimeElement = null;
 let endTimeElement = null;
-const musicTimes = [0, 0, 0]; // اضافه کردن آرایه‌ای برای نگهداری زمان پخش هر موزیک
+const musicTimes = [0, 0, 0]; // آرایه برای ذخیره زمان هر موزیک
+
+function formatTime(seconds) {
+  const minutes = Math.floor(seconds / 60);
+  const secs = Math.floor(seconds % 60);
+  return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
+}
 
 function togglePlayPause(index, buttonId) {
   const button = document.getElementById(buttonId);
@@ -226,7 +218,7 @@ function togglePlayPause(index, buttonId) {
   endTimeElement = document.getElementById('end-time' + (index + 1));
 
   if (currentAudio && !currentAudio.paused) {
-    musicTimes[index] = currentAudio.currentTime; // ذخیره زمان پخش موزیک
+    musicTimes[index] = currentAudio.currentTime; // ذخیره زمان پخش موزیک فعلی
     currentAudio.pause();
     button.textContent = 'پخش کردن';
   } else {
@@ -234,6 +226,7 @@ function togglePlayPause(index, buttonId) {
       currentAudio.pause();
     }
     currentAudio = new Audio(musicFiles[index]);
+    currentAudio.preload = 'auto'; // پیش‌بارگذاری موزیک
     currentAudio.currentTime = musicTimes[index]; // تنظیم زمان پخش موزیک از مقدار ذخیره شده
     progressBar = document.getElementById('progress' + (index + 1));
     currentAudio.ontimeupdate = () => {
@@ -244,7 +237,7 @@ function togglePlayPause(index, buttonId) {
     };
     currentAudio.play();
     button.textContent = 'متوقف کردن';
-    endTimeElement.textContent = formatTime(currentAudio.duration);
+    endTimeElement.textContent = formatTime(currentAudio.duration); // اضافه کردن مقدار پایان موزیک
   }
 
   if (currentButton && currentButton !== button) {
@@ -253,23 +246,32 @@ function togglePlayPause(index, buttonId) {
   currentButton = button;
 }
 
-    function showMusicItems() {
-      const musicItems = document.querySelectorAll('.music-item');
-      musicItems.forEach((item, index) => {
-        setTimeout(() => {
-          item.classList.add('visible');
-        }, index * 500); // انیمیشن ظاهر شدن هر آیتم
-      });
-    }
+function showMusicItems() {
+  const musicItems = document.querySelectorAll('.music-item');
+  musicItems.forEach((item, index) => {
+    setTimeout(() => {
+      item.classList.add('visible');
+    }, index * 500); // انیمیشن ظاهر شدن هر آیتم
+  });
+}
 
-    function seek(event, progressBarId) {
-      const progress = document.getElementById(progressBarId);
-      const clickX = event.offsetX;
-      const width = progress.offsetWidth;
-      const duration = currentAudio.duration;
-      currentAudio.currentTime = (clickX / width) * duration;
-      currentTime = currentAudio.currentTime;
-    }
+function seek(event, progressBarId) {
+  const progress = document.getElementById(progressBarId);
+  const clickX = event.offsetX;
+  const width = progress.offsetWidth;
+  const duration = currentAudio.duration;
+  currentAudio.currentTime = (clickX / width) * duration;
+  currentTime = currentAudio.currentTime;
+}
+
+function updateProgressBar() {
+  const progressBar = document.getElementById('bar');
+  const totalHeight = document.body.scrollHeight - window.innerHeight;
+  const scrollPosition = window.scrollY;
+  const progressPercentage = (scrollPosition / totalHeight) * 100;
+  progressBar.style.width = progressPercentage + "%";
+}
+
   </script>
 </body>
 
