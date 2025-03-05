@@ -1,7 +1,15 @@
+@font-face{
+font-family:peyda;
+    src: url(YEKAN/Persian-Yekan.ttf);
+}
+
+
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family:peyda;
+    font-siza:16px;
 }
 
 .progress-container {
