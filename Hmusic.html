@@ -20,8 +20,8 @@ font-family:peyda;
     font-siza:16px;
 }
     
-    body {
-    
+   body {
+      font-family: Arial, sans-serif;
       background-color: #282c34;
       color: #61dafb;
       margin: 0;
@@ -37,7 +37,6 @@ font-family:peyda;
       right: 0;
       direction: rtl;
       z-index: 9999;
-
     }
 
     .bar {
@@ -156,6 +155,40 @@ font-family:peyda;
       margin-top: 10px;
       font-size: 14px;
     }
+
+    .comments-section {
+      margin-top: 50px;
+      padding: 20px;
+      background-color: #20232a;
+      border-radius: 10px;
+      color: #61dafb;
+    }
+
+    .comments-section textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #61dafb;
+      background-color: #282c34;
+      color: #61dafb;
+    }
+
+    .comments-section button {
+      padding: 10px 20px;
+      margin-top: 10px;
+      background-color: #61dafb;
+      border: none;
+      color: #20232a;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .comment {
+      padding: 10px;
+      margin-top: 10px;
+      background-color: #282c34;
+      border-radius: 5px;
+    }
   </style>
 </head>
 
@@ -205,11 +238,46 @@ font-family:peyda;
 
 
   
+  <div class="comments-section">
+    <h2 style="text-align: center;">بخش نظرات</h2>
+    <form id="commentForm">
+      <textarea id="commentInput" rows="5" placeholder="نظر خود را وارد کنید..."></textarea>
+      <button type="button" onclick="submitComment()">ارسال نظر</button>
+    </form>
+    <div id="commentList"></div>
+  </div>
+
+  <audio id="audioPlayer"></audio>
   <script>
 
+    
 
+    function submitComment() {
+      const commentInput = document.getElementById('commentInput');
+      const commentList = document.getElementById('commentList');
 
-      
+      if (commentInput.value.trim() === '') {
+        alert('لطفاً نظر خود را وارد کنید!');
+        return;
+      }
+
+      const newComment = document.createElement('div');
+      newComment.className = 'comment';
+      newComment.textContent = commentInput.value;
+
+      commentList.appendChild(newComment);
+      commentInput.value = ''; // Clear input
+    }
+    
+    function showMusicItems() {
+      const musicItems = document.querySelectorAll('.music-item');
+      musicItems.forEach((item, index) => {
+        setTimeout(() => {
+          item.classList.add('visible');
+        }, index * 500);
+      });
+    }
+
 
 
     function updateProgressBar() {
